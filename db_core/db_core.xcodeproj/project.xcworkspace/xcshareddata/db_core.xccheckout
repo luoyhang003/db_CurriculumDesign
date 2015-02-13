@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AC420C43-E632-4B75-BB14-51C4E7894461</string>
+	<key>IDESourceControlProjectName</key>
+	<string>db_core</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>40F4ECF4FADB3237523C988ABF7D935213D576FF</key>
+		<string>github.com:luoyhang003/db_CurriculumDesign.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>db_core/db_core.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>40F4ECF4FADB3237523C988ABF7D935213D576FF</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:luoyhang003/db_CurriculumDesign.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>40F4ECF4FADB3237523C988ABF7D935213D576FF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>40F4ECF4FADB3237523C988ABF7D935213D576FF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>db_CurriculumDesign</string>
+		</dict>
+	</array>
+</dict>
+</plist>
