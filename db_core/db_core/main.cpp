@@ -113,6 +113,179 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
 }
 
 
+//析构函数
+template <class VertexType, class EdgeType>
+Graph<VertexType, EdgeType>::~Graph(void)
+{
+    for (int i = 0; i < NumVertices; i++) {
+        Edge<EdgeType> *p = VertexList[i].out;
+        while (p!=NULL) {
+            VertexList[i].out = p->next;
+            delete p;
+            p = VertexList[i].out;
+        }
+    }
+    delete [] VertexList;
+}
+
+
+//成员函数ReturnVertexPos()
+template <class VertexType, class EdgeType>
+int Graph<VertexType, EdgeType>::ReturnVertexPos(const VertexType &vertex)
+{
+    for(int i = 0; i < NumVertices; i++)
+    {
+        if (VertexList[i].data == vertex) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+//成员函数ReturnFirstNeighbor()
+template <class VertexType, class EdgeType>
+int Graph<VertexType, EdgeType>::ReturnFirstNeighbor(int v)
+{
+    Edge<EdgeType> *p;
+    if (v != -1) {
+        p = VertexList[v].out;
+        if (p != NULL) {
+            return p->jj;
+        }
+        return -1;
+    }
+}
+
+
+//成员函数ReturnNextNeighbor()
+template <class VertexType, class EdgeType>
+int Graph<VertexType, EdgeType>::ReturnNextNeighbor(int vi, int vj)
+{
+    if (vi != -1) {
+        Edge<EdgeType> *p = VertexList[vi].out;
+        while (p != NULL) {
+            if (p->jj == vj && p->next != NULL) {
+                return p->next->jj;
+            }
+            else
+                p = p->next;
+        }
+    }
+    return -1;
+}
+
+
+//成员函数ReturnEdgeInfo()
+template <class VertexType, class EdgeType>
+EdgeType Graph<VertexType, EdgeType>::ReturnEdgeInfo(int vi, int vj)
+{
+    vi = ReturnVertexPos(vi);
+    vj = ReturnVertexPos(vj);
+    if (vi != -1 && vj != -1) {
+        Edge<EdgeType> *p = VertexList[vi].out;
+        while (p != NULL) {
+            if (p->jj == vj) {
+                return p->edgeInfo;
+            }
+            else
+                p = p->next;
+        }
+    }
+    return 0;
+}
+
+
+//成员函数InsertVertex()
+template <class VertexType, class EdgeType>
+void Graph<VertexType,EdgeType>::InsertVertex(const VertexType &vertex)
+{
+    int i = ReturnVertexPos(vertex);
+    if (i > 0 && i < NumVertices) {
+        cerr << "表中已有该节点" << endl;
+        return;
+    }
+    VertexList[NumVertices].data = vertex;
+    VertexList[NumVertices].out = NULL;
+    NumVertices++;
+}
+
+
+//成员函数DeleteVertex()
+//假设与该顶点关联的边都已经删除
+template <class VertexType, class EdgeType>
+void Graph<VertexType, EdgeType>::DeleteVertex(int v)
+{
+    if (v < 0 || v > NumVertices - 1) {
+        cerr<<"非法删除"<<endl;
+        return;
+    }
+    for (int i = v; i < NumVertices - 1; i++) {
+        VertexList[i] = VertexList[i+1];
+    }
+    NumVertices--;
+}
+
+
+//成员函数InsertEdge()
+template <class VertexType, class EdgeType>
+void Graph<VertexType, EdgeType>::InsertEdge(int vi, int vj, EdgeType edgeInfo)
+{
+    Edge<EdgeType> *p = VertexList[vi].out;
+    Edge<EdgeType> *NewEdge = NULL;
+    NewEdge = new Edge<EdgeType>(vj, edgeInfo);
+    if (p == NULL) {
+        VertexList[vi].out = NewEdge;
+        NumEdges++;
+        return;
+    }
+    while (p->jj != vj && p->next != NULL) {
+        p = p->next;
+    }
+    if (p->jj == vj) {
+        cerr<<"非法插入"<<endl;
+        return;
+    }
+    if (p->next == NULL) {
+        p->next = NewEdge;
+        NumEdges++;
+    }
+}
+
+
+//
+template <class VertexType, class EdgeType>
+void Graph<VertexType, EdgeType>::DeleteEdge(int vi, int vj)
+{
+    Edge<EdgeType> *r;
+    Edge<EdgeType> *p = VertexList[vi].out;
+    if (p == NULL) {
+        cerr<<"非法删除"<<endl;
+        return;
+    }
+    if (p->jj == vj) {
+        VertexList[vi].out = p->next;
+        NumEdges--;
+        return;
+    }
+    r = p;
+    p = p->next;
+    if (p == NULL) {
+        cerr<<"非法删除"<<endl;
+        return;
+    }
+    while (p->jj != vj && p->next != NULL) {
+        r = p;
+        p = p->next;
+    }
+    if (p->jj == vj) {
+        r->next = p->next;
+        delete p;
+        NumEdges--;
+        return;
+    }
+    cerr<<"非法删除"<<endl;
+}
 
 
 
@@ -123,10 +296,19 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
 
 
 
-int main(int argc, const char * argv[]) {
+
+
+
+
+
+
+
+
+
+int main() {
     // insert code here...
     cout << "Hello, World!\n";
-    
+    Graph<int, int> g;
     return 0;
 }
 
