@@ -289,8 +289,27 @@ void Graph<VertexType, EdgeType>::DeleteEdge(int vi, int vj)
 
 
 
+template <class VertexType, class EdgeType>
+class Digraph:Graph<VertexType, EdgeType>
+{
+
+};
 
 
+
+template <class VertexType, class EdgeType>
+class WeightedGraph:Graph<VertexType, EdgeType>
+{
+
+};
+
+
+
+template <class VertexType, class EdgeType>
+class WeightedDigraph:Graph<VertexType, EdgeType>
+{
+    
+};
 
 
 
