@@ -83,6 +83,8 @@ public:
     int ReturnFirstNeighbor(int v);
     //返回与某边相关联的下一条边的另一个顶点序号
     int ReturnNextNeighbor(int vi, int vj);
+    //返回顶点度数
+    int ReturnDegree(int v);
 };
 
 
@@ -253,7 +255,7 @@ void Graph<VertexType, EdgeType>::InsertEdge(int vi, int vj, EdgeType edgeInfo)
 }
 
 
-//
+//成员函数DeleteEdge
 template <class VertexType, class EdgeType>
 void Graph<VertexType, EdgeType>::DeleteEdge(int vi, int vj)
 {
@@ -288,6 +290,24 @@ void Graph<VertexType, EdgeType>::DeleteEdge(int vi, int vj)
 }
 
 
+//成员函数ReturnDegree
+template <class VertexType, class EdgeType>
+int Graph<VertexType, EdgeType>::ReturnDegree(int v)
+{
+    int vi = ReturnVertexPos(v);
+    int count = 0;
+    if (vi != -1) {
+        Edge<EdgeType> *p = VertexList[vi].out;
+        cout<<"YES";
+
+        while (p != NULL) {
+            count++;
+            cout<<"YES";
+            p = p->next;
+        }
+    }
+    return count;
+}
 
 template <class VertexType, class EdgeType>
 class Digraph:Graph<VertexType, EdgeType>
@@ -330,11 +350,24 @@ class WeightedDigraph:Graph<VertexType, EdgeType>
 int main() {
     // insert code here...
     cout << "Hello, World!\n";
-    Graph<int, int> g;
+    Graph<char, int> g;
+//    g.InsertVertex('a');
+//    g.InsertVertex('b');
+//    g.InsertVertex('c');
+//    g.InsertVertex('d');
+//    g.InsertVertex('e');
+
+    cout<<g.IsEmpty()<<endl;
+    cout<<g.ReturnDegree('a')<<endl;
     return 0;
 }
 
 
-
-
-
+//5
+//a b c d e
+//5
+//a b 1
+//a d 1
+//a e 1
+//c d 1
+//c e 1
