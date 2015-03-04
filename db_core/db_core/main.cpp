@@ -106,11 +106,12 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
     }
     cout << "请输入边数：" << endl;
     cin >> e;
+    cout << "请输入每条边：" << endl;
     for (int i=0; i < e; i++) {
-        cin >> first >> second >> Edgeinfo;
+        cin >> first >> second;
         k = ReturnVertexPos(first);
         j = ReturnVertexPos(second);
-        InsertEdge(k, j, Edgeinfo);
+        InsertEdge(k, j, 1);
     }
 }
 
@@ -380,11 +381,12 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
     }
     cout << "请输入边数：" << endl;
     cin >> e;
+    cout << "请输入每条边：" << endl;
     for (int i=0; i < e; i++) {
-        cin >> first >> second >> Edgeinfo;
+        cin >> first >> second;
         k = ReturnVertexPos(first);
         j = ReturnVertexPos(second);
-        InsertEdge(k, j, Edgeinfo);
+        InsertEdge(k, j, 1);
     }
 }
 
@@ -656,6 +658,7 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
     }
     cout << "请输入边数：" << endl;
     cin >> e;
+    cout << "请输入每条边及其权值：" << endl;
     for (int i=0; i < e; i++) {
         cin >> first >> second >> Edgeinfo;
         k = ReturnVertexPos(first);
@@ -930,6 +933,7 @@ NumVertices(0),MaxNumVertices(size),NumEdges(0)
     }
     cout << "请输入边数：" << endl;
     cin >> e;
+    cout << "请输入每条边及其权值：" << endl;
     for (int i=0; i < e; i++) {
         cin >> first >> second >> Edgeinfo;
         k = ReturnVertexPos(first);
@@ -1132,7 +1136,6 @@ int WeightedDigraph<VertexType, EdgeType>::ReturnDegree(int v)
     }
     return count;
 }
-//
 
 
 
@@ -1147,20 +1150,19 @@ int WeightedDigraph<VertexType, EdgeType>::ReturnDegree(int v)
 
 
 
-int main() {
-    // insert code here...
-    cout << "Hello, World!\n";
-    WeightedGraph<char, int> g;
+//int main() {
+//    cout << "Hello, World!\n";
+//    WeightedGraph<char, int> g;
 //    g.InsertVertex('a');
 //    g.InsertVertex('b');
 //    g.InsertVertex('c');
 //    g.InsertVertex('d');
 //    g.InsertVertex('e');
-
-    cout<<g.IsEmpty()<<endl;
-    cout<<g.ReturnDegree('a')<<endl;
-    return 0;
-}
+//
+//    cout<<g.IsEmpty()<<endl;
+//    cout<<g.ReturnDegree('a')<<endl;
+//    return 0;
+//}
 
 
 //5
