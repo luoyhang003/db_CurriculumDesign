@@ -17,90 +17,99 @@ using namespace std;
 #define MAX_EDGES 40
 //定义图中最大节点数
 #define MAX_NODE 30
+
 #define Max 100000
+
 
 //构建图类
 class Graph
 {
 private:
     int nodecount;  //顶点数
+    
     int edgecount;  //边数
+    
     int a[MAX_NODE];    //表示定点的数组
-    //set<int> a;
-    int b[MAX_NODE][MAX_NODE];
+
+    int b[MAX_NODE][MAX_NODE];  //存储图的矩阵
+
+
 public:
-    Graph(int s = MAX_NODE);//构造函数
+    Graph(int s = MAX_NODE);    //构造函数
     
-    int getNodeCount();//当前的节点数
+    int getNodeCount(); //当前的节点数
     
-    int getEdgeCount();//当前的边数
+    int getEdgeCount(); //当前的边数
     
-    void insertNode(int);//插入一个节点
+    void insertNode(int);   //插入一个节点
     
-    void isertEdge(int ,int ,int);//插入一条边
+    void insertEdge(int ,int ,int);  //插入一条边
     
     
-    void deleteEdge(int,int);//删除一条边
+    void deleteEdge(int,int);   //删除一条边
     
-    void prim(int);//生成最小树
+    void prim(int); //生成最小树
     
-    int DFS(int);//深度优先搜索
+    int DFS(int);   //深度优先搜索
     
     void DFS(int node,int v[],int& n);
     
-    void BFS(int);//广度优先搜索
+    void BFS(int);  //广度优先搜索
     
-    bool isliantong();//判断是否连通
+    bool isliantong();  //判断是否连通
     
-    void liantongfenliang();//连通分量的数目
+    void liantongfenliang();    //连通分量的数目
     
-    int getWeight(int,int);//获得某条边的权值
+    int getWeight(int,int); //获得某条边的权值
     
-    int getFirstNeighbor(int);//获得所给顶点的第一个相邻节点
+    int getFirstNeighbor(int);  //获得所给顶点的第一个相邻节点
     
-    int getNextNeighbor(int,int);//获得某一邻接节点的下一个邻接节点
+    int getNextNeighbor(int,int);   //获得某一邻接节点的下一个邻接节点
     
     
     
 };
 
 
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
-Graph::Graph(int s)//构造函数
-{
+//构造函数
+Graph::Graph(int s)
+{//参数s表示图的最大节点
+    //将图初始化，图为空
     for(int i=0;i<=s-1;i++)
         for(int j=0;j<=s-1;j++)
             b[i][j]=0;
     nodecount=0;
     for(int k=0;k<=s-1;k++)
-        a[k]=-1;
+        a[k]=-1;    //-1表示无顶点
     
 }
 
 
-int Graph::getNodeCount()//当前的节点数
+
+//获取当前的顶点数
+int Graph::getNodeCount()
 {
-    return nodecount;
+    return nodecount;   //返回节点数
 }
 
 
-int Graph::getEdgeCount()//当前的边数
+//获取当前的边数
+int Graph::getEdgeCount()
 {
-    return edgecount;
+    return edgecount;   //返回边数
 }
 
-void Graph::insertNode(int it)//插入一个节点
+
+//插入一个顶点
+void Graph::insertNode(int v)
 {
-    //a[nodecount++]=it;
-    //a.insert(it);
-    a[it]=it;
-    nodecount++;
+    a[v]=v; //为顶点赋值
+    nodecount++;    //顶点数+1
 }
 
-void Graph::isertEdge(int x,int y,int w)//插入一条边
+
+//插入一条边
+void Graph::insertEdge(int x,int y,int w)
 {
     b[x][y]=w;
     b[y][x]=w;
@@ -109,15 +118,18 @@ void Graph::isertEdge(int x,int y,int w)//插入一条边
 }
 
 
-void Graph::deleteEdge(int x ,int y)//删除一条边
+//删除一条边
+void Graph::deleteEdge(int x ,int y)
 {
     b[x][y]=0;
     b[y][x]=0;
     cout<<"边("<<x<<","<<y<<")已经成功删除!";
-    edgecount--;
+    edgecount--;    //边数-1
 }
 
-void Graph::prim(int x)//生成最小树
+
+//prim求生成最小树
+void Graph::prim(int x)
 {
     int* d=new int[getNodeCount()];
     for(int id=0;id<=getNodeCount()-1;id++)
@@ -143,15 +155,12 @@ void Graph::prim(int x)//生成最小树
                         node=k;
                         l=j;
                         r=k;
-                        //e[a[j]][a[k]]=1;
                         min=b[l][r];
-                        //d[a[k]]
                     }
             }
         d[node]=1;
         e[l][r]=b[l][r];
     }
-    //}
     
     for(int ln=0;ln<=9;ln++)
         for(int rn=0;rn<=9;rn++)
@@ -159,11 +168,11 @@ void Graph::prim(int x)//生成最小树
                 cout<<"("<<ln<<","<<rn<<",权值为"<<e[ln][rn]<<") ,";
     
     
-    
-    
 }
 
-void Graph::BFS(int x)//广度优先搜索
+
+//广度优先搜索
+void Graph::BFS(int x)
 {
     int* v=new int[getNodeCount()];
     for(int i=0;i<=getNodeCount()-1;i++)
@@ -174,14 +183,12 @@ void Graph::BFS(int x)//广度优先搜索
     q.push(x);
     int next;
     while(!q.empty())
-    {//cout<<"!!!"<<endl;
-        //x=
+    {
         x=q.front();
         q.pop();
         
         next=getFirstNeighbor(x);
-        //if(a[next]==-1)
-        //    continue;
+        
         while(next!=-1)
         {  if(!v[next]&&a[next]==next)
         {
@@ -196,7 +203,7 @@ void Graph::BFS(int x)//广度优先搜索
 }
 
 
-
+//深度优先搜索
 void Graph::DFS(int node,int v[],int& n)
 {
     cout<<node<<" ";
@@ -212,6 +219,8 @@ void Graph::DFS(int node,int v[],int& n)
     }
 }
 
+
+//递归实现的深度优先搜索
 int Graph::DFS(int node)
 {
     int n=0;
@@ -225,19 +234,21 @@ int Graph::DFS(int node)
 }
 
 
-
-bool Graph::isliantong()//判断是否连通
+//判断是否连通
+bool Graph::isliantong()
 {
     int n=0;
     n=DFS(0);
-    cout<<"该图的总节点数为:"<<nodecount<<"!"<<endl;
-    cout<<"其中一个连通分量连通的节点数为:"<<n<<"!"<<endl;
+    cout<<"该图的总节点数为:"<<nodecount<<endl;
+    cout<<"其中一个连通分量连通的节点数为:"<<n<<endl;
     if(n==nodecount)
         return true;
     else return false;
 }
 
-void Graph::liantongfenliang()//连通分量的数目
+
+//连通分量的数目
+void Graph::liantongfenliang()
 {
     int n=0;
     int* v=new int[nodecount];
@@ -248,17 +259,20 @@ void Graph::liantongfenliang()//连通分量的数目
             cout<<"(";
             DFS(j,v,n);
             cout<<") ";
-            //newliantong();
         }
     delete[] v;
 }
 
-int Graph::getWeight(int x,int y)//获得某条边的权值
+
+//获得某条边的权值
+int Graph::getWeight(int x,int y)
 {
     return b[x][y];
 }
 
-int Graph::getFirstNeighbor(int x)//获得所给顶点的第一个相邻节点
+
+//获得所给顶点的第一个相邻节点
+int Graph::getFirstNeighbor(int x)
 {
     int n=-1;
     if(nodecount==0)
@@ -266,13 +280,14 @@ int Graph::getFirstNeighbor(int x)//获得所给顶点的第一个相邻节点
     for(int i=0;i<=nodecount-1;i++)
         if(b[x][i]!=0)
         {  n=a[i];
-            //cout<<n<<"!!"<<endl;
             break;
         }
     return n;
 }
 
-int Graph::getNextNeighbor(int x,int y)//获得某一邻接节点的下一个邻接节点
+
+//获得某一邻接节点的下一个邻接节点
+int Graph::getNextNeighbor(int x,int y)
 {
     if(y==nodecount-1)
         return -1;
@@ -288,11 +303,13 @@ int Graph::getNextNeighbor(int x,int y)//获得某一邻接节点的下一个邻
 }
 
 
+
+//测试主函数
 int main(){
-    int num;
-    cout<<"请输入该图最多的节点数："<<endl;
-    cin >> num;
-    Graph G(num);
+//    int num;
+//    cout<<"请输入该图最多的节点数："<<endl;
+//    cin >> num;
+    Graph G(30);
     
     cout<<"请输入向图添加几个节点?"<<endl;
     int n;
@@ -316,7 +333,7 @@ int main(){
     int x,y,w;
     for(int j=0;j<=e-1;j++)
     {cin>>x>>y>>w;
-        G.isertEdge(x,y,w);
+        G.insertEdge(x,y,w);
     }
     
     cout<<"你的图已经建立成功!"<<endl;
@@ -398,13 +415,13 @@ int main(){
                 break;
                 
             case 8:
-                cout<<"请输入你要添加的"<<e<<"条边以及边上对应的权值!"<<endl;
+                cout<<"请输入你要添加的"<<e<<"条边以及边上对应的权值"<<endl;
                 cin>>x>>y>>w;
-                G.isertEdge(x,y,w);
+                G.insertEdge(x,y,w);
                 break;
                 
             case 0:
-                cout<<"谢谢,测试完成!"<<endl;
+                cout<<"已退出"<<endl;
                 return 0;
                 
         }
