@@ -154,40 +154,6 @@ AnimatedObject.prototype.alignBottom = function(otherObject)
 	this.y = otherObject.bottom() + this.getWidth() / 2;		
 	
 }
-
-
-
-/* TODO:  Do we need these in the base? 		
-		function left(): Number
-		{
-			return x - getWidth() / 2;
-		}
-		
-		function right():Number
-		{
-			return x + getWidth() / 2;
-		}
-		
-		function top():Number
-		{
-			return y - getHeight() / 2;
-		}
-		
-		function bottom():Number
-		{
-			return y + getHeight() / 2;
-		}
-		
-		function centerX():Number
-		{
-			return x;
-		}
-		
-		function centerY():Number
-		{
-			return y;
-		}
-		*/
 		
 		
 AnimatedObject.prototype.getClosestCardinalPoint = function(fromX, fromY)
