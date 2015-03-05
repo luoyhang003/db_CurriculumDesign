@@ -296,7 +296,6 @@ int Graph::getNextNeighbor(int x,int y)
         if(b[x][i]!=0)
         {
             n=i;
-            
             break;
         }
     return n;
@@ -306,10 +305,10 @@ int Graph::getNextNeighbor(int x,int y)
 
 //测试主函数
 int main(){
-//    int num;
-//    cout<<"请输入该图最多的节点数："<<endl;
-//    cin >> num;
-    Graph G(30);
+    int num;
+    cout<<"请输入该图最多的节点数："<<endl;
+    cin >> num;
+    Graph G(num);
     
     cout<<"请输入向图添加几个节点?"<<endl;
     int n;
